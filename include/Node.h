@@ -61,6 +61,10 @@ class Node {
             else
                 return false;
         }
+        //Operator
+        bool operator==(const Node& node) {
+            return (code_ == node.code_);
+        }
 
 };
 

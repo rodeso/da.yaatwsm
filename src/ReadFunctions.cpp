@@ -1,8 +1,34 @@
-
 #include "../include/ReadFunctions.h"
-#include "../include/Include.h"
 
-vector<Node> readCities(const string& pathname) {
+template<class T>
+vector<Node> ReadFunctions<T>::readReservoirs(const string &pathname) {
+    vector<Node> nodesReservoirs;
+
+    ifstream file(pathname);
+    if (!file.is_open()) {
+        cerr << "Error (204): Wrong Path";
+        return nodesReservoirs;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        istringstream ss(line);
+        string reservoir, municipality, code, id, maximumDelivery;
+
+
+        if (getline(ss, reservoir, ',') && getline(ss, municipality, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, maximumDelivery, ',')) {
+            nodesReservoirs.push_back(Node('s', reservoir, stoi(id), code, municipality, stoi(maximumDelivery), 0));
+        } else {
+            cerr << "Error (302): Reservoir Loading Error";
+        }
+    }
+
+    file.close();
+    nodesReservoirs.erase(nodesReservoirs.begin());
+    return nodesReservoirs;
+}
+template <class T>
+vector<Node> ReadFunctions<T>::readCities(const string& pathname) {
     vector<Node> nodesCities;
 
     ifstream file(pathname);
@@ -28,38 +54,8 @@ vector<Node> readCities(const string& pathname) {
     nodesCities.erase(nodesCities.begin());
     return nodesCities;
 }
-
-vector<Node> readReservoirs(const string& pathname) {
-    vector<Node> nodesReservoirs;
-
-    ifstream file(pathname);
-    if (!file.is_open()) {
-        cerr << "Error (204): Wrong Path";
-        return nodesReservoirs;
-    }
-
-    string line;
-    while (getline(file, line)) {
-        istringstream ss(line);
-        string reservoir, municipality, code, id, maximumDelivery;
-
-
-        if (getline(ss, reservoir, ',') && getline(ss, municipality, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, maximumDelivery, ',')) {
-            nodesReservoirs.push_back(Node('s', reservoir, stoi(id), code, municipality, stoi(maximumDelivery), 0));
-        } else {
-            cerr << "Error (302): Reservoir Loading Error";
-        }
-    }
-
-    file.close();
-    nodesReservoirs.erase(nodesReservoirs.begin());
-    return nodesReservoirs;
-
-
-}
-
-
-vector<Node> readStations(const string& pathname) {
+template<class T>
+vector<Node> ReadFunctions<T>::readStations(const string &pathname) {
     vector<Node> nodesStations;
 
     ifstream file(pathname);
