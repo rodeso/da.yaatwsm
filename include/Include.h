@@ -9,6 +9,7 @@
 #include <queue>
 #include <climits>
 #include <fstream>
+#include <csignal>
 #include "Graph.h"
 
 using namespace std;
