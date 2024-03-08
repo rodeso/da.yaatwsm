@@ -10,10 +10,6 @@ add_executable(DA1G195 main.cpp
         include/Graph.h
         src/ReadFunctions.cpp
         include/ReadFunctions.h
-        src/City.cpp
-        include/City.h
-        src/Reservoir.cpp
-        include/Reservoir.h
-        src/Station.cpp
-        include/Station.h
+        src/Node.cpp
+        include/Node.h
         include/Include.h)
