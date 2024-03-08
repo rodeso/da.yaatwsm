@@ -17,13 +17,14 @@ class Node {
 
     public:
         //Constructor
-        Node(char type, string name, int id, string code, double demand, int quantity) {
+        Node(char type, string name, int id, string code, string municipality, int quantity, double demand) {
             type_=type;
             name_=name;
             id_=id;
             code_=code;
-            demand_=demand;
+            municipality_=municipality;
             quantity_=quantity;
+            demand_=demand;
         }
         //Getters
         string getName() {return name_;}
