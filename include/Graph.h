@@ -1,7 +1,3 @@
-//
-// Created by pedro on 08-03-2024.
-//
-
 #ifndef YAATWSM_GRAPH_H
 #define YAATWSM_GRAPH_H
 

@@ -28,7 +28,6 @@ void Menu::run() {
                 case '2':
                     goto menu_text;
                 case '3':
-
                     goto menu_text;
                 case '4':
                     cout << "Goodbye!" << endl;
