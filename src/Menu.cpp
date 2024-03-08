@@ -49,9 +49,9 @@ void Menu::run() {
             }
         }
         menu_text:;
-        nodeS = ReadFunctions<Node>::readReservoirs(path + "reservoirs.csv");
-        nodeT = ReadFunctions<Node>::readCities(path + "cities.csv");
-        nodeU = ReadFunctions<Node>::readStations(path + "stations.csv");
+        nodeS = ReadFunctions::readReservoirs(path.append("reservoirs.csv"));
+        nodeT = ReadFunctions::readCities(path.append("cities.csv"));
+        nodeU = ReadFunctions::readStations(path.append("stations.csv"));
         for (const Node &i : nodeS) {
             graph.addVertex(i);
         }

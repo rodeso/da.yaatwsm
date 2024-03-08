@@ -1,7 +1,7 @@
 #include "../include/ReadFunctions.h"
 
-template<class T>
-vector<Node> ReadFunctions<T>::readReservoirs(const string &pathname) {
+
+vector<Node> ReadFunctions::readReservoirs(string pathname) {
     vector<Node> nodesReservoirs;
 
     ifstream file(pathname);
@@ -27,8 +27,7 @@ vector<Node> ReadFunctions<T>::readReservoirs(const string &pathname) {
     nodesReservoirs.erase(nodesReservoirs.begin());
     return nodesReservoirs;
 }
-template <class T>
-vector<Node> ReadFunctions<T>::readCities(const string& pathname) {
+vector<Node> ReadFunctions::readCities(string pathname) {
     vector<Node> nodesCities;
 
     ifstream file(pathname);
@@ -54,8 +53,8 @@ vector<Node> ReadFunctions<T>::readCities(const string& pathname) {
     nodesCities.erase(nodesCities.begin());
     return nodesCities;
 }
-template<class T>
-vector<Node> ReadFunctions<T>::readStations(const string &pathname) {
+
+vector<Node> ReadFunctions::readStations(string pathname) {
     vector<Node> nodesStations;
 
     ifstream file(pathname);
@@ -79,7 +78,8 @@ vector<Node> ReadFunctions<T>::readStations(const string &pathname) {
     return nodesStations;
 }
 
-template<class T>
-void readPipes(Graph<T>& graph,const string& pathname) {
+void readPipes(Graph<Node>& graph,const string& pathname) {
 
 }
+
+
