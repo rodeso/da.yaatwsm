@@ -9,6 +9,8 @@ vector<Node> ReadFunctions::readReservoirs(string pathname) {
         cerr << "Error (204): Wrong Path";
         return nodesReservoirs;
     }
+    string fline;
+    getline(file, fline);
 
     string line;
     while (getline(file, line)) {
@@ -24,7 +26,6 @@ vector<Node> ReadFunctions::readReservoirs(string pathname) {
     }
 
     file.close();
-    nodesReservoirs.erase(nodesReservoirs.begin());
     return nodesReservoirs;
 }
 vector<Node> ReadFunctions::readCities(string pathname) {
@@ -32,11 +33,14 @@ vector<Node> ReadFunctions::readCities(string pathname) {
 
     ifstream file(pathname);
     if (!file.is_open()) {
-        cerr << "Error (204): Wrong Path";
+        cerr << "Error (205): Wrong Path";
         return nodesCities;
     }
+    string fline;
+    getline(file, fline);
 
     string line;
+
     while (getline(file, line)) {
         istringstream ss(line);
         string city, code, id, population, demand;
@@ -50,7 +54,6 @@ vector<Node> ReadFunctions::readCities(string pathname) {
     }
 
     file.close();
-    nodesCities.erase(nodesCities.begin());
     return nodesCities;
 }
 
@@ -59,9 +62,11 @@ vector<Node> ReadFunctions::readStations(string pathname) {
 
     ifstream file(pathname);
     if (!file.is_open()) {
-        cerr << "Error (204): Wrong Path";
+        cerr << "Error (206): Wrong Path";
         return nodesStations;
     }
+    string fline;
+    getline(file, fline);
 
     string line;
     while (getline(file, line)) {
@@ -74,7 +79,6 @@ vector<Node> ReadFunctions::readStations(string pathname) {
         }
     }
     file.close();
-    nodesStations.erase(nodesStations.begin());
     return nodesStations;
 }
 

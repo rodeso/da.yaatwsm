@@ -65,6 +65,17 @@ class Node {
         bool operator==(const Node& node) {
             return (code_ == node.code_);
         }
+        //Print
+        void print() {
+            cout << "----------------------------------------" << endl;
+            cout << "Type: " << getType() << endl;
+            cout << "Name: " << name_ << endl;
+            cout << "ID: " << id_ << endl;
+            cout << "Code: " << code_ << endl;
+            cout << "Municipality: " << municipality_ << endl;
+            cout << "Quantity: " << quantity_ << endl;
+            cout << "Demand: " << demand_ << endl;
+        }
 
 };
 

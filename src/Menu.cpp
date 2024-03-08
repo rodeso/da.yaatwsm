@@ -10,9 +10,10 @@ void Menu::run() {
     vector<Node> nodeT;
     vector<Node> nodeU;
     // Menu
-    string decision;
-    string path;
+
     while (true) {
+        string decision;
+        string path;
         cout << string(LINE_SIZE_, '-') << endl;
         cout << "Welcome to the Water Supply Management Analysis Tool!" << endl;
         cout << string(LINE_SIZE_, '-') << endl;
@@ -40,6 +41,7 @@ void Menu::run() {
                     cout << "Please enter the path to the folder containing the csv files: ";
                     getline(cin, path);
                     goto menu_text;
+                    break;
                 case '4':
                     cout << "Goodbye!" << endl;
                     exit(0);
@@ -48,10 +50,10 @@ void Menu::run() {
                     break;
             }
         }
-        menu_text:;
-        nodeS = ReadFunctions::readReservoirs(path.append("reservoirs.csv"));
-        nodeT = ReadFunctions::readCities(path.append("cities.csv"));
-        nodeU = ReadFunctions::readStations(path.append("stations.csv"));
+        menu_text:
+        nodeS = ReadFunctions::readReservoirs(path + "Reservoirs.csv");
+        nodeT = ReadFunctions::readCities(path + "Cities.csv");
+        nodeU = ReadFunctions::readStations(path + "Stations.csv");
         for (const Node &i : nodeS) {
             graph.addVertex(i);
         }
@@ -61,9 +63,8 @@ void Menu::run() {
         for (const Node &i : nodeU) {
             graph.addVertex(i);
         }
+        for (auto n : graph.getVertexSet()) {
+            n->getInfo().print();
+        }
     }
 }
-
-
-
-#include "../include/Menu.h"
