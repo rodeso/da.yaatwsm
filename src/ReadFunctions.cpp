@@ -7,7 +7,7 @@ vector<Node> readCities(const string& pathname) {
 
     ifstream file(pathname);
     if (!file.is_open()) {
-        cerr << "Error (205): Wrong Pathname";
+        cerr << "Error (204): Wrong Path";
         return nodesCities;
     }
 
@@ -20,11 +20,12 @@ vector<Node> readCities(const string& pathname) {
         if (getline(ss, city, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, demand, ',') && getline(ss, population, ',')) {
             nodesCities.push_back(Node('t', city, stoi(id), code,"", stoi(population), stod(demand)));
         } else {
-            cerr << "Error (303): City Loading Error";
+            cerr << "Error (301): City Loading Error";
         }
     }
 
     file.close();
+    nodesCities.erase(nodesCities.begin());
     return nodesCities;
 }
 
@@ -33,7 +34,7 @@ vector<Node> readReservoirs(const string& pathname) {
 
     ifstream file(pathname);
     if (!file.is_open()) {
-        cerr << "Error (205): Wrong Pathname";
+        cerr << "Error (204): Wrong Path";
         return nodesReservoirs;
     }
 
@@ -46,11 +47,12 @@ vector<Node> readReservoirs(const string& pathname) {
         if (getline(ss, reservoir, ',') && getline(ss, municipality, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, maximumDelivery, ',')) {
             nodesReservoirs.push_back(Node('s', reservoir, stoi(id), code, municipality, stoi(maximumDelivery), 0));
         } else {
-            cerr << "Error (303): Reservoir Loading Error";
+            cerr << "Error (302): Reservoir Loading Error";
         }
     }
 
     file.close();
+    nodesReservoirs.erase(nodesReservoirs.begin());
     return nodesReservoirs;
 
 
@@ -58,10 +60,30 @@ vector<Node> readReservoirs(const string& pathname) {
 
 
 vector<Node> readStations(const string& pathname) {
+    vector<Node> nodesStations;
 
+    ifstream file(pathname);
+    if (!file.is_open()) {
+        cerr << "Error (204): Wrong Path";
+        return nodesStations;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        istringstream ss(line);
+        string id, code;
+        if (getline(ss, id, ',') && getline(ss, code, ',')) {
+            nodesStations.push_back(Node('u', "", stoi(id), code, "", 0, 0));
+        } else {
+            cerr << "Error (303): Station Loading Error";
+        }
+    }
+    file.close();
+    nodesStations.erase(nodesStations.begin());
+    return nodesStations;
 }
 
-
+template<class T>
 void readPipes(Graph<T>& graph,const string& pathname) {
 
 }
