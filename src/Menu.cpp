@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "../include/Menu.h"
 
 int Menu::LINE_SIZE_ = 119;
 
@@ -44,4 +44,4 @@ void Menu::run() {
 
 
 
-#include "Menu.h"
+#include "../include/Menu.h"
