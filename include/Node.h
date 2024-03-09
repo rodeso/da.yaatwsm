@@ -93,17 +93,34 @@ class Node {
 
     //Print
         void print() {
-            cout << "----------------------------------------" << endl;
+        if (this->isSource()) {
             cout << "Type: " << getType() << endl;
             cout << "Name: " << name_ << endl;
             cout << "ID: " << id_ << endl;
             cout << "Code: " << code_ << endl;
             cout << "Hex Code: " << stringToHex(code_) << endl;
             cout << "Municipality: " << municipality_ << endl;
-            cout << "Quantity: " << quantity_ << endl;
-            cout << "Demand: " << demand_ << endl;
+            cout << "Max Delivery: " << quantity_ << endl;
+            cout << "----------------------------------------" << endl;
         }
-
+        if (this->isSource()) {
+            cout << "Type: " << getType() << endl;
+            cout << "Cidade: " << name_ << endl;
+            cout << "ID: " << id_ << endl;
+            cout << "Code: " << code_ << endl;
+            cout << "Hex Code: " << stringToHex(code_) << endl;
+            cout << "Demand" << demand_ << endl;
+            cout << "Population: " << quantity_ << endl;
+            cout << "----------------------------------------" << endl;
+        }
+        if (this->isStation()) {
+            cout << "Type: " << getType() << endl;
+            cout << "ID: " << id_ << endl;
+            cout << "Code: " << code_ << endl;
+            cout << "Hex Code: " << stringToHex(code_) << endl;
+            cout << "----------------------------------------" << endl;
+        }
+    }
 };
 
 #endif //YAATWSM_NODE_H
