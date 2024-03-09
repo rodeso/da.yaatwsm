@@ -82,8 +82,44 @@ vector<Node> ReadFunctions::readStations(string pathname) {
     return nodesStations;
 }
 
-void readPipes(Graph<Node>& graph,const string& pathname) {
+void ReadFunctions::readPipes(Graph<Node> &graph, std::string pathname) {
+    ifstream file(pathname);
+    if (!file.is_open()) {
+        cerr << "Error (207): Wrong Path";
+        return;
+    }
+    string fline;
+    getline(file, fline);
 
+    string line;
+    while (getline(file, line)) {
+        istringstream ss(line);
+        string start, end, capacity, direction;
+        if (getline(ss, start, ',') && getline(ss, end, ',') && getline(ss, capacity, ',') && getline(ss, direction, ',')) {
+            //cout << Node::stringToHex(start) << endl;
+            //cout << Node::stringToHex(end) << endl;
+
+            Node a('d', "", 0, start, "", 0, 0);
+            Node b('d', "", 0, end, "", 0, 0);
+
+            auto vertexA = graph.findVertex(a);
+            auto vertexB = graph.findVertex(b);
+
+            if (vertexA && vertexB) {
+                graph.addEdge(vertexA->getInfo(), vertexB->getInfo(), stoi(capacity));
+
+                int d = stoi(direction);
+                if (d == 0) {
+                    graph.addEdge(vertexB->getInfo(), vertexA->getInfo(), stoi(capacity));
+                }
+            } else {
+                cerr << "Error (501): Vertex not found in the graph" << endl;
+            }
+        } else {
+            cerr << "Error (304): Pipe Loading Error";
+        }
+    }
+    file.close();
 }
 
 

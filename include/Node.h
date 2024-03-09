@@ -21,11 +21,13 @@ class Node {
             type_=type;
             name_=name;
             id_=id;
-            code_=code;
+            code_= removeCarriageReturn(code);
             municipality_=municipality;
             quantity_=quantity;
             demand_=demand;
         }
+        //Destructor
+        ~Node() {}
         //Getters
         string getName() {return name_;}
         int getId() {return id_;}
@@ -41,7 +43,9 @@ class Node {
             if (type_ == 't')
                 return "Sink";
             if (type_ == 'u')
-                return "";
+                return "Station";
+            if (type_ == 'd')
+                return "Dummy";
         }
         bool isSource() {
             if (type_ == 's')
@@ -65,13 +69,36 @@ class Node {
         bool operator==(const Node& node) {
             return (code_ == node.code_);
         }
-        //Print
+        //Util
+        static string stringToHex(const std::string& input) {
+            std::stringstream hexStream;
+            hexStream << hex << uppercase << setfill('0');
+
+            for (char ch : input) {
+                hexStream << setw(2) << static_cast<int>(static_cast<unsigned char>(ch));
+            }
+
+            return hexStream.str();
+        }
+        static string removeCarriageReturn(const string& input) {
+            size_t lastNonCR = input.find_last_not_of('\r');
+
+            if (lastNonCR != string::npos) {
+                return input.substr(0, lastNonCR + 1);
+            } else {
+                // String consists only of carriage returns, return an empty string
+                return "";
+            }
+        }
+
+    //Print
         void print() {
             cout << "----------------------------------------" << endl;
             cout << "Type: " << getType() << endl;
             cout << "Name: " << name_ << endl;
             cout << "ID: " << id_ << endl;
             cout << "Code: " << code_ << endl;
+            cout << "Hex Code: " << stringToHex(code_) << endl;
             cout << "Municipality: " << municipality_ << endl;
             cout << "Quantity: " << quantity_ << endl;
             cout << "Demand: " << demand_ << endl;

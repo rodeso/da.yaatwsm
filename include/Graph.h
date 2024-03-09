@@ -7,6 +7,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include "Node.h"
 //#include "../data_structures/MutablePriorityQueue.h"
 
 template <class T>
@@ -360,7 +361,6 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
             return v;
     return nullptr;
 }
-
 /*
  * Finds the index of the vertex with a given content.
  */

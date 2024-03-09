@@ -12,7 +12,7 @@ class ReadFunctions {
         static vector<Node> readReservoirs(string pathname);
         static vector<Node> readCities(string pathname);
         static vector<Node> readStations(string pathname);
-        void readPipes(Graph<Node>& graph,string pathname);
+        static void readPipes(Graph<Node>& graph, string pathname);
 
 };
 

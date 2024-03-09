@@ -65,6 +65,7 @@ void Menu::run() {
         for (auto n : graph.getVertexSet()) {
             n->getInfo().print();
         }
+        ReadFunctions::readPipes(graph, path + "Pipes.csv");
         sleep(5);
         break;
     }
