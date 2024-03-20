@@ -28,7 +28,7 @@ vector<Node> ReadFunctions::readReservoirs(string pathname) {
     file.close();
     return nodesReservoirs;
 }
-vector<Node> ReadFunctions::readCities(string pathname) {
+vector<Node> ReadFunctions::readCities(unordered_map<string, string> &citydict, string pathname) {
     vector<Node> nodesCities;
 
     ifstream file(pathname);
@@ -45,12 +45,15 @@ vector<Node> ReadFunctions::readCities(string pathname) {
         istringstream ss(line);
         string city, code, id, population, demand;
 
-
         if (getline(ss, city, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, demand, ',') && getline(ss, population, ',')) {
-            nodesCities.push_back(Node('t', city, stoi(id), code,"", stoi(population), stod(demand)));
+            nodesCities.push_back(Node('t', Node::removeCarriageReturn(city), stoi(id), code,"", stoi(population), stod(demand)));
+            citydict[Node::removeCarriageReturn(city)] = Node::removeCarriageReturn(code);
         } else {
             cerr << "Error (301): City Loading Error";
         }
+    }
+    if (citydict.size() == 0) {
+        cerr << "Error (701): Map Empty!";
     }
 
     file.close();

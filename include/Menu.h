@@ -14,6 +14,7 @@ class Menu {
 
     public:
         void run();
+        void function1(Graph<Node> &graph, unordered_map<string, string> &citydict);
 
 
 
