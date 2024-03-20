@@ -101,7 +101,7 @@ class Node {
             cout << "Hex Code: " << stringToHex(code_) << endl;
             cout << "Municipality: " << municipality_ << endl;
             cout << "Max Delivery: " << quantity_ << endl;
-            cout << "----------------------------------------" << endl;
+            cout << string(LINE_SIZE_, '-') << endl;
         }
         if (this->isSource()) {
             cout << "Type: " << getType() << endl;
@@ -111,15 +111,16 @@ class Node {
             cout << "Hex Code: " << stringToHex(code_) << endl;
             cout << "Demand" << demand_ << endl;
             cout << "Population: " << quantity_ << endl;
-            cout << "----------------------------------------" << endl;
+            cout << string(LINE_SIZE_, '-') << endl;
         }
         if (this->isStation()) {
             cout << "Type: " << getType() << endl;
             cout << "ID: " << id_ << endl;
             cout << "Code: " << code_ << endl;
             cout << "Hex Code: " << stringToHex(code_) << endl;
-            cout << "----------------------------------------" << endl;
+            cout << string(LINE_SIZE_, '-') << endl;
         }
+
     }
 };
 

@@ -1,7 +1,5 @@
 #include "../include/Menu.h"
 
-int Menu::LINE_SIZE_ = 119;
-
 
 void Menu::run() {
     // Graph
@@ -62,9 +60,14 @@ void Menu::run() {
         for (const Node &i : nodeU) {
             graph.addVertex(i);
         }
+        cout << string(LINE_SIZE_, '-') << endl;
+        cout << "Loading data contents..." << endl;
+        cout << string(LINE_SIZE_, '-') << endl;
         for (auto n : graph.getVertexSet()) {
             n->getInfo().print();
         }
+        cout << "Loading menu..." << endl;
+        cout << string(LINE_SIZE_, '-') << endl;
         ReadFunctions::readPipes(graph, path + "Pipes.csv");
         sleep(5);
         break;
@@ -86,6 +89,7 @@ void Menu::run() {
         cout << string(LINE_SIZE_, '-') << endl;
         cout << "Please select the task you wish to perform by inputting its number: ";
         getline(cin, decision);
+        cout << string(LINE_SIZE_, '-') << endl;
         cout << endl;
         if (decision.size() != 1) {
             cout << "Invalid input. Please enter a number between 0 and 7: " << endl;
@@ -93,11 +97,11 @@ void Menu::run() {
         }
         switch (decision[0]) {
             case '1':
-                function1(graph, citydict);
+                case1(graph, citydict);
                 sleep(5);
                 break;
-                //to be made
             case '2':
+                case2(graph);
                 //to be made
                 break;
             case '3':
@@ -129,11 +133,14 @@ void Menu::run() {
 
 
 
-void Menu::function1(Graph<Node> &graph, unordered_map<string,string> &citydict) {
+void Menu::case1(Graph<Node> &graph, unordered_map<string,string> &citydict) {
     string city;
     cout << "Please insert the name of the city: ";
     getline(cin,city);
     Node a('d', "", 0, (citydict[city]), "", 0, 0);
-    auto vertexA = graph.findVertex(a);
-    //cout << vertexA->getInfo().getType() << endl;
+    cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
+}
+
+void Menu::case2(Graph<Node> &graph) {
+    OperationFunctions::maxFlowPerCity(graph);
 }

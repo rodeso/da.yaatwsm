@@ -4,17 +4,18 @@
 #include "Graph.h"
 #include "Node.h"
 #include "ReadFunctions.h"
+#include "OperationFunctions.h"
 
 
 class Menu {
 
     private:
-        static int LINE_SIZE_;
         Graph<Node> graph;
 
     public:
         void run();
-        void function1(Graph<Node> &graph, unordered_map<string, string> &citydict);
+        void case1(Graph<Node> &graph, unordered_map<string, string> &citydict);
+        void case2(Graph<Node> &graph);
 
 
 

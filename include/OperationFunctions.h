@@ -9,7 +9,10 @@ class OperationFunctions {
     private:
 
     public:
-        static int maxFlow(Graph<Node>& graph, Vertex<Node> t);
+        static double maxFlowOfCity(Graph<Node>& graph, Node a);
+        static void maxFlowPerCity(Graph<Node>& graph);
+
+
 };
 
 
