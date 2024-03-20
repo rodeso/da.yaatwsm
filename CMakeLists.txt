@@ -12,4 +12,6 @@ add_executable(DA1G195 main.cpp
         include/ReadFunctions.h
         src/Node.cpp
         include/Node.h
-        include/Include.h)
+        include/Include.h
+        src/OperationFunctions.cpp
+        include/OperationFunctions.h)
