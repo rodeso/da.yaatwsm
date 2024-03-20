@@ -86,23 +86,34 @@ void Menu::run() {
         cout << "Please select the task you wish to perform by inputting its number: ";
 
         while (true) {
+            string city;
             getline(cin, decision);
             cout << endl;
             if (decision.size() != 1) { cout << "Invalid input. Please enter a number between 1 and 4: "; continue;}
             switch (decision[0]) {
                 case '1':
+                    cout << "Please insert the name of the city: ";
+                    getline(cin,city);
+
+                    //to be made
                     goto end;
                 case '2':
+                    //to be made
                     goto end;
                 case '3':
+                    //to be made
                     goto end;
                 case '4':
+                    //to be made
                     goto end;
                 case '5':
+                    //to be made
                     goto end;
                 case '6':
+                    //to be made
                     goto end;
                 case '7':
+                    //to be made
                     goto end;
                 case '8':
                     cout << "Goodbye!" << endl;

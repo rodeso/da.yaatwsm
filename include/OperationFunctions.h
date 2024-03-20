@@ -9,7 +9,7 @@ class OperationFunctions {
     private:
 
     public:
-        static int maxFlow(Graph<Node>& graph G, Node t);
+        static int maxFlow(Graph<Node>& graph, Node t);
 };
 
 
