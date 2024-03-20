@@ -69,6 +69,7 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
     }
 }
 
+
 void edmondsKarp(Graph<Node> *g, Node source, Node target) {
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
@@ -90,12 +91,12 @@ void edmondsKarp(Graph<Node> *g, Node source, Node target) {
 }
 
 
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-
-double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node a) {
+Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
     Graph<Node> graphCopy;
     graphCopy = graph.getCopy();
 
@@ -116,44 +117,70 @@ double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node a) {
     }
 
     edmondsKarp(&graphCopy, SuperSource,SuperSink);
+
+    return graphCopy;
+}
+
+
+
+double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node a) {
+    Graph<Node> graphCopy;
+    graphCopy = maxFlow(graph);
     auto t = graphCopy.findVertex(a);
     for (auto e : t->getAdj()) {
-        if (SuperSink.getCode() == e->getDest()->getInfo().getCode()) {
+        if ("C_0" == e->getDest()->getInfo().getCode()) {
             return e->getFlow();
         }
     }
     return 0;
 }
 
+
+
 void OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
     Graph<Node> graphCopy;
-    graphCopy = graph.getCopy();
-
-    Node SuperSource('s', "supersource", 0, "R_0", "supersource", INT_MAX, 0);
-    Node SuperSink('t', "supersink", 0, "C_0", "supersink", 0, INT_MAX);
-
-    graphCopy.addVertex(SuperSource);
-    graphCopy.addVertex(SuperSink);
-    for (auto v : graphCopy.getVertexSet()) {
-        if (v->getInfo().isSource()) {
-            graphCopy.addEdge(SuperSource, v->getInfo(), v->getInfo().getQuantity()); //Source Pipes are limited by Quantity??
-            continue;
-        }
-        if (v->getInfo().isSink()) {
-            graphCopy.addEdge(v->getInfo(), SuperSink, v->getInfo().getDemand()); //Sink Pipes are limited by Demand??
-            continue;
-        }
-    }
-    edmondsKarp(&graphCopy, SuperSource,SuperSink);
+    graphCopy = maxFlow(graph);
     for (auto t : graphCopy.getVertexSet()) {
         if (t->getInfo().isSink() && t->getInfo().getCode() != "C_0") {
             for (auto e : t->getAdj()) {
-                if (SuperSink.getCode() == e->getDest()->getInfo().getCode()) {
+                if ("C_0" == e->getDest()->getInfo().getCode()) {
                     cout << t->getInfo().getName() << " --> " << e->getFlow() << endl;
                 }
             }
         }
     }
 }
+
+
+
+vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& graph) {
+    vector<pair<Node, double>> res;
+    Graph<Node> graphCopy;
+    graphCopy = maxFlow(graph);
+    for (auto t : graphCopy.getVertexSet()) {
+        if (t->getInfo().isSink() && t->getInfo().getCode() != "C_0") {
+            for (auto e : t->getAdj()) {
+                if ("C_0" == e->getDest()->getInfo().getCode()) {
+                    if (e->getFlow() != t->getInfo().getDemand()) {
+                        pair<Node,double> a = make_pair(t->getInfo(), t->getInfo().getDemand() - e->getFlow());
+                        res.push_back(a);
+
+                    }
+                }
+            }
+        }
+    }
+    return res;
+}
+
+
+
+
+
+
+
+
+
+
 
 

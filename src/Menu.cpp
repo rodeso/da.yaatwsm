@@ -105,6 +105,7 @@ void Menu::run() {
                 //to be made
                 break;
             case '3':
+                case3(graph);
                 //to be made
                 break;
             case '4':
@@ -143,4 +144,17 @@ void Menu::case1(Graph<Node> &graph, unordered_map<string,string> &citydict) {
 
 void Menu::case2(Graph<Node> &graph) {
     OperationFunctions::maxFlowPerCity(graph);
+}
+
+void Menu::case3(Graph<Node> &graph) {
+    vector<pair<Node, double>> res = OperationFunctions::supplyAndDemand(graph);
+    if (res.size() == 0) {
+        cout << "All cities are supplied!";
+    }
+    else {
+        cout << "The cities that cannot be supplied by the desired water rate level are listed bellow, with the amount of water flow in deficit." << endl;
+        for (auto t : res) {
+            cout << t.first.getCode() << " --> " << t.second << endl;
+        }
+    }
 }

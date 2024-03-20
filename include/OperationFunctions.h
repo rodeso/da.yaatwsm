@@ -9,9 +9,10 @@ class OperationFunctions {
     private:
 
     public:
+        static Graph<Node> maxFlow(Graph<Node>& graph);
         static double maxFlowOfCity(Graph<Node>& graph, Node a);
         static void maxFlowPerCity(Graph<Node>& graph);
-
+        static vector<pair<Node, double>> supplyAndDemand(Graph<Node>& graph);
 
 };
 

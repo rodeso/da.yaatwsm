@@ -16,6 +16,7 @@ class Menu {
         void run();
         void case1(Graph<Node> &graph, unordered_map<string, string> &citydict);
         void case2(Graph<Node> &graph);
+        void case3(Graph<Node> &graph);
 
 
 

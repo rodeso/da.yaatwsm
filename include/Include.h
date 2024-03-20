@@ -16,7 +16,7 @@
 #include <unordered_set>
 #include <map>
 
-static int LINE_SIZE_ = 119;
+static int LINE_SIZE_ = 130;
 
 
 using namespace std;
