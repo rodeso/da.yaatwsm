@@ -7,7 +7,6 @@ void Menu::run() {
     vector<Node> nodeS;
     vector<Node> nodeT;
     vector<Node> nodeU;
-    unordered_map<string,string> citydict;
 
     // Load Graph
     while (true) {
@@ -97,22 +96,20 @@ void Menu::run() {
         }
         switch (decision[0]) {
             case '1':
-                case1(graph, citydict);
+                case1();
                 sleep(5);
                 break;
             case '2':
-                case2(graph);
-                //to be made
+                case2();
                 break;
             case '3':
-                case3(graph);
-                //to be made
+                case3();
                 break;
             case '4':
-                //to be made
+                case4();
                 break;
             case '5':
-                //to be made
+                case5();
                 break;
             case '6':
                 //to be made
@@ -133,8 +130,7 @@ void Menu::run() {
 }
 
 
-
-void Menu::case1(Graph<Node> &graph, unordered_map<string,string> &citydict) {
+void Menu::case1() {
     string city;
     cout << "Please insert the name of the city: ";
     getline(cin,city);
@@ -142,11 +138,11 @@ void Menu::case1(Graph<Node> &graph, unordered_map<string,string> &citydict) {
     cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
 }
 
-void Menu::case2(Graph<Node> &graph) {
+void Menu::case2() {
     OperationFunctions::maxFlowPerCity(graph);
 }
 
-void Menu::case3(Graph<Node> &graph) {
+void Menu::case3() {
     vector<pair<Node, double>> res = OperationFunctions::supplyAndDemand(graph);
     if (res.size() == 0) {
         cout << "All cities are supplied!";
@@ -157,4 +153,13 @@ void Menu::case3(Graph<Node> &graph) {
             cout << t.first.getCode() << " --> " << t.second << endl;
         }
     }
+}
+void Menu::case4() {} //TODO LATER
+
+void Menu::case5() {
+    string reservoirCode;
+    cout << "Please insert the code of the reservoir: ";
+    getline(cin,reservoirCode);
+    Node del('d', "", 0, reservoirCode, "", 0, 0);
+    OperationFunctions::reservoirDeactivation(graph, del);
 }

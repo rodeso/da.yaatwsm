@@ -11,12 +11,17 @@ class Menu {
 
     private:
         Graph<Node> graph;
+        unordered_map<string,string> citydict;
 
     public:
         void run();
-        void case1(Graph<Node> &graph, unordered_map<string, string> &citydict);
-        void case2(Graph<Node> &graph);
-        void case3(Graph<Node> &graph);
+        void case1();
+        void case2();
+        void case3();
+        void case4();
+        void case5();
+        void case6();
+        void case7();
 
 
 

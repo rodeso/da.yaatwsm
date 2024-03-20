@@ -173,7 +173,21 @@ vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& grap
     return res;
 }
 
+//MAYBE????
+void OperationFunctions::reservoirDeactivation(Graph<Node>& graph, Node a) {
 
+    Graph<Node> graphCopy1 = graph.getCopy();
+    graphCopy1.removeVertex(a);
+    auto res = supplyAndDemand(graphCopy1);
+    if (res.size() == 0) { cerr << "Error: WHAT??\n";}
+    for (auto a : res) {
+        cout << a.first.getCode() << " --> " << a.first.getName() << " --> " << a.second << endl;
+
+    }
+
+
+
+}
 
 
 
