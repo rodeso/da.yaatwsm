@@ -94,30 +94,15 @@ class Node {
     //Print
         void print() {
         if (this->isSource()) {
-            cout << "Type: " << getType() << endl;
-            cout << "Name: " << name_ << endl;
-            cout << "ID: " << id_ << endl;
-            cout << "Code: " << code_ << endl;
-            cout << "Hex Code: " << stringToHex(code_) << endl;
-            cout << "Municipality: " << municipality_ << endl;
-            cout << "Max Delivery: " << quantity_ << endl;
+            cout << "Type: " << getType() << "   Name: " << name_ << "   ID: " << id_ << "   Code: " << code_ << "   Hex Code: " << stringToHex(code_) << "   Municipality: " << municipality_ << "   Max Delivery: " << quantity_ << endl;
             cout << string(LINE_SIZE_, '-') << endl;
         }
-        if (this->isSource()) {
-            cout << "Type: " << getType() << endl;
-            cout << "Cidade: " << name_ << endl;
-            cout << "ID: " << id_ << endl;
-            cout << "Code: " << code_ << endl;
-            cout << "Hex Code: " << stringToHex(code_) << endl;
-            cout << "Demand" << demand_ << endl;
-            cout << "Population: " << quantity_ << endl;
+        if (this->isSink()) {
+            cout << "Type: " << getType() << "   City: " << name_ << "   ID: " << id_ << "   Code: " << code_ << "   Hex Code: " << stringToHex(code_) << "   Demand: " << demand_ << "   Population: " << quantity_ << endl;
             cout << string(LINE_SIZE_, '-') << endl;
         }
         if (this->isStation()) {
-            cout << "Type: " << getType() << endl;
-            cout << "ID: " << id_ << endl;
-            cout << "Code: " << code_ << endl;
-            cout << "Hex Code: " << stringToHex(code_) << endl;
+            cout << "Type: " << getType() << "   ID: " << id_ << "   Code: " << code_ << "   Hex Code: " << stringToHex(code_) << endl;
             cout << string(LINE_SIZE_, '-') << endl;
         }
 

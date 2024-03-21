@@ -65,7 +65,7 @@ void Menu::run() {
         for (auto n : graph.getVertexSet()) {
             n->getInfo().print();
         }
-        cout << "Loading menu..." << endl;
+        cout << "Loading system..." << endl;
         cout << string(LINE_SIZE_, '-') << endl;
         ReadFunctions::readPipes(graph, path + "Pipes.csv");
         sleep(5);
@@ -136,11 +136,14 @@ void Menu::case1() {
     getline(cin,city);
     Node a('d', "", 0, (citydict[city]), "", 0, 0);
     cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
+    cout << endl;
 }
 
 void Menu::case2() {
     double max = OperationFunctions::maxFlowPerCity(graph);
+    cout << endl;
     cout << "Total flow: " << max << endl;;
+    cout << endl;
 }
 
 void Menu::case3() {
@@ -153,6 +156,7 @@ void Menu::case3() {
         for (auto t : res) {
             cout << t.first.getCode() << " --> " << t.second << endl;
         }
+        cout << endl;
     }
 }
 void Menu::case4() {} //TODO LATER
