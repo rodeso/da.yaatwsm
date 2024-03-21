@@ -137,7 +137,8 @@ double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node a) {
 
 
 
-void OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
+double OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
+    double max = 0.0;
     Graph<Node> graphCopy;
     graphCopy = maxFlow(graph);
     for (auto t : graphCopy.getVertexSet()) {
@@ -145,10 +146,12 @@ void OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
             for (auto e : t->getAdj()) {
                 if ("C_0" == e->getDest()->getInfo().getCode()) {
                     cout << t->getInfo().getName() << " --> " << e->getFlow() << endl;
+                    max += e->getFlow();
                 }
             }
         }
     }
+    return max;
 }
 
 

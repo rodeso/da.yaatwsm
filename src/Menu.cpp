@@ -139,7 +139,8 @@ void Menu::case1() {
 }
 
 void Menu::case2() {
-    OperationFunctions::maxFlowPerCity(graph);
+    double max = OperationFunctions::maxFlowPerCity(graph);
+    cout << "Total flow: " << max << endl;;
 }
 
 void Menu::case3() {
