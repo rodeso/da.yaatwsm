@@ -7,7 +7,7 @@
 
 
 template <class Node>
-bool findAugmentingPaths(Graph<Node> *g, Vertex<Node>* s, Vertex<Node>* t) {
+bool findAugmentingPaths(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t) {
 
     for(auto v : g->getVertexSet()) {v->setVisited(false);}
 
@@ -70,7 +70,7 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
 }
 
 
-void edmondsKarp(Graph<Node> *g, Node source, Node target) {
+void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
 
@@ -100,8 +100,8 @@ Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
     Graph<Node> graphCopy;
     graphCopy = graph.getCopy();
 
-    Node SuperSource('s', "supersource", 0, "R_0", "supersource", INT_MAX, 0);
-    Node SuperSink('t', "supersink", 0, "C_0", "supersink", 0, INT_MAX);
+    Node SuperSource('s', "superSource", 0, "R_0", "superSource", INT_MAX, 0);
+    Node SuperSink('t', "superSink", 0, "C_0", "superSink", 0, INT_MAX);
 
     graphCopy.addVertex(SuperSource);
     graphCopy.addVertex(SuperSink);
@@ -123,7 +123,7 @@ Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
 
 
 
-double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node a) {
+double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node const &a) {
     Graph<Node> graphCopy;
     graphCopy = maxFlow(graph);
     auto t = graphCopy.findVertex(a);
@@ -181,15 +181,28 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 
     Graph<Node> graphCopy1 = graph.getCopy();
     graphCopy1.removeVertex(a);
+    auto original = supplyAndDemand(graph);
     auto res = supplyAndDemand(graphCopy1);
-    if (res.size() == 0) { cerr << "Error: WHAT??\n";}
-    for (auto a : res) {
-        cout << a.first.getCode() << " --> " << a.first.getName() << " --> " << a.second << endl;
+    double deficit = 0;
+    if (res.empty()) { cerr << "Error: WHAT??\n";}
+
+    for (auto b : res) {
+        double bus = 0;
+        bool hasOriginalDeficit = false;
+        for (auto c : original) {
+            if (b.first.getCode() == c.first.getCode()) {
+                hasOriginalDeficit = true;
+                bus = c.second;
+            }
+        }
+        if (hasOriginalDeficit) {
+            deficit = b.second - bus;
+        }
+        if (deficit > 0) {
+            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after " << a.getCode() << "'s deactivation: " << bus+deficit << " (difference of " << deficit << ")" << endl;
+        }
 
     }
-
-
-
 }
 
 

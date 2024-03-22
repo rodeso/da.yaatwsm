@@ -11,7 +11,7 @@ class Menu {
 
     private:
         Graph<Node> graph;
-        unordered_map<string,string> citydict;
+        unordered_map<string,string> cityDict;
 
     public:
         void run();

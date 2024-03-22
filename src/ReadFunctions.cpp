@@ -1,7 +1,7 @@
 #include "../include/ReadFunctions.h"
 
 
-vector<Node> ReadFunctions::readReservoirs(string pathname) {
+vector<Node> ReadFunctions::readReservoirs(string const &pathname) {
     vector<Node> nodesReservoirs;
 
     ifstream file(pathname);
@@ -9,8 +9,8 @@ vector<Node> ReadFunctions::readReservoirs(string pathname) {
         cerr << "Error (204): Wrong Path";
         return nodesReservoirs;
     }
-    string fline;
-    getline(file, fline);
+    string fLine;
+    getline(file, fLine);
 
     string line;
     while (getline(file, line)) {
@@ -28,7 +28,7 @@ vector<Node> ReadFunctions::readReservoirs(string pathname) {
     file.close();
     return nodesReservoirs;
 }
-vector<Node> ReadFunctions::readCities(unordered_map<string, string> &citydict, string pathname) {
+vector<Node> ReadFunctions::readCities(unordered_map<string, string> &cityDict, string const &pathname) {
     vector<Node> nodesCities;
 
     ifstream file(pathname);
@@ -36,8 +36,8 @@ vector<Node> ReadFunctions::readCities(unordered_map<string, string> &citydict, 
         cerr << "Error (205): Wrong Path";
         return nodesCities;
     }
-    string fline;
-    getline(file, fline);
+    string fLine;
+    getline(file, fLine);
 
     string line;
 
@@ -47,12 +47,12 @@ vector<Node> ReadFunctions::readCities(unordered_map<string, string> &citydict, 
 
         if (getline(ss, city, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, demand, ',') && getline(ss, population, ',')) {
             nodesCities.push_back(Node('t', Node::removeCarriageReturn(city), stoi(id), code,"", stoi(population), stod(demand)));
-            citydict[Node::removeCarriageReturn(city)] = Node::removeCarriageReturn(code);
+            cityDict[Node::removeCarriageReturn(city)] = Node::removeCarriageReturn(code);
         } else {
             cerr << "Error (301): City Loading Error";
         }
     }
-    if (citydict.size() == 0) {
+    if (cityDict.empty()) {
         cerr << "Error (701): Map Empty!";
     }
 
@@ -60,7 +60,7 @@ vector<Node> ReadFunctions::readCities(unordered_map<string, string> &citydict, 
     return nodesCities;
 }
 
-vector<Node> ReadFunctions::readStations(string pathname) {
+vector<Node> ReadFunctions::readStations(string const &pathname) {
     vector<Node> nodesStations;
 
     ifstream file(pathname);
@@ -68,8 +68,8 @@ vector<Node> ReadFunctions::readStations(string pathname) {
         cerr << "Error (206): Wrong Path";
         return nodesStations;
     }
-    string fline;
-    getline(file, fline);
+    string fLine;
+    getline(file, fLine);
 
     string line;
     while (getline(file, line)) {
@@ -85,23 +85,20 @@ vector<Node> ReadFunctions::readStations(string pathname) {
     return nodesStations;
 }
 
-void ReadFunctions::readPipes(Graph<Node> &graph, std::string pathname) {
+void ReadFunctions::readPipes(Graph<Node> &graph, std::string const &pathname) {
     ifstream file(pathname);
     if (!file.is_open()) {
         cerr << "Error (207): Wrong Path";
         return;
     }
-    string fline;
-    getline(file, fline);
+    string fLine;
+    getline(file, fLine);
 
     string line;
     while (getline(file, line)) {
         istringstream ss(line);
         string start, end, capacity, direction;
         if (getline(ss, start, ',') && getline(ss, end, ',') && getline(ss, capacity, ',') && getline(ss, direction, ',')) {
-            //cout << Node::stringToHex(start) << endl;
-            //cout << Node::stringToHex(end) << endl;
-
             Node a('d', "", 0, start, "", 0, 0);
             Node b('d', "", 0, end, "", 0, 0);
 

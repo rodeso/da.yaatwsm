@@ -48,7 +48,7 @@ void Menu::run() {
         }
         load:
         nodeS = ReadFunctions::readReservoirs(path + "Reservoirs.csv");
-        nodeT = ReadFunctions::readCities(citydict, path + "Cities.csv");
+        nodeT = ReadFunctions::readCities(cityDict, path + "Cities.csv");
         nodeU = ReadFunctions::readStations(path + "Stations.csv");
         for (const Node &i : nodeS) {
             graph.addVertex(i);
@@ -101,22 +101,31 @@ void Menu::run() {
                 break;
             case '2':
                 case2();
+                sleep(5);
                 break;
             case '3':
                 case3();
+                sleep(5);
                 break;
             case '4':
                 case4();
+                sleep(5);
                 break;
             case '5':
                 case5();
+                sleep(5);
                 break;
             case '6':
                 case6();
-                break;
+                sleep(5);
                 break;
             case '7':
-                //to be made
+                case7();
+                sleep(5);
+                break;
+            case '8':
+                case8();
+                sleep(5);
                 break;
             case '0':
                 cout << "Goodbye!" << endl;
@@ -125,8 +134,6 @@ void Menu::run() {
                 cout << "Invalid input. Please enter a number between 0 and 7: " << endl;
                 break;
         }
-
-
     }
 }
 
@@ -135,7 +142,7 @@ void Menu::case1() {
     string city;
     cout << "Please insert the name of the city: ";
     getline(cin,city);
-    Node a('d', "", 0, (citydict[city]), "", 0, 0);
+    Node a('d', "", 0, (cityDict[city]), "", 0, 0);
     cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
     cout << endl;
 }
@@ -143,13 +150,13 @@ void Menu::case1() {
 void Menu::case2() {
     double max = OperationFunctions::maxFlowPerCity(graph);
     cout << endl;
-    cout << "Total flow: " << max << endl;;
+    cout << "Total flow: " << max << endl;
     cout << endl;
 }
 
 void Menu::case3() {
     vector<pair<Node, double>> res = OperationFunctions::supplyAndDemand(graph);
-    if (res.size() == 0) {
+    if (res.empty()) {
         cout << "All cities are supplied!";
     }
     else {
@@ -169,6 +176,7 @@ void Menu::case5() {
     Node del('d', "", 0, reservoirCode, "", 0, 0);
     OperationFunctions::deactivation(graph, del);
 }
+
 void Menu::case6() {
     string pumpingCode;
     cout << "Please insert the code of the Pumping Station to be removed: ";
@@ -179,37 +187,32 @@ void Menu::case6() {
 
 void Menu::case7() {
     string A, B;
-    char chara, charb;
+    char charA, charB;
     cout << "Please insert the Service Point A of the Pipe to be removed: ";
     getline(cin, A);
-    if (A[0] == 'R')
-    {
-        chara = 's';
+    if (A[0] == 'R') {
+        charA = 's';
     }
-    else if (A[0] == 'P')
-    {
-        chara = 'u';
+    else if (A[0] == 'P') {
+        charA = 'u';
     }
-    else if (A[0] == 'C')
-    {
-        chara = 't';
+    else {
+        charA = 't';
     }
     cout << "Please insert the Service Point B of the Pipe to be removed: ";
     getline(cin, B);
-    if (B[0] == 'R')
-    {
-        charb = 's';
+    if (B[0] == 'R') {
+        charB = 's';
     }
-    else if (A[0] == 'P')
-    {
-        charb = 'u';
+    else if (A[0] == 'P') {
+        charB = 'u';
     }
-    else if (A[0] == 'C')
-    {
-        charb = 't';
+    else {
+        charB = 't';
     }
-    Node start(chara,"", 0, A, "", 0, 0);
-    Node end(charb, "", 0, B, "", 0, 0);
+    Node start(charA,"", 0, A, "", 0, 0);
+    Node end(charB, "", 0, B, "", 0, 0);
+
 
 }
 
@@ -217,6 +220,6 @@ void Menu::case8() {
     string city;
     cout <<  "Please insert the City you want to examine: ";
     getline(cin, city);
-    Node a('t', "", 0, citydict[city], "", 0, 0);
+    Node a('t', "", 0, cityDict[city], "", 0, 0);
 
 }

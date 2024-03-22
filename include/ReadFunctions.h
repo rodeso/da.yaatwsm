@@ -9,12 +9,10 @@ class ReadFunctions {
     private:
 
     public:
-        static vector<Node> readReservoirs(string pathname);
-        static vector<Node> readCities(unordered_map<string,string> &dict, string pathname);
-        static vector<Node> readStations(string pathname);
-        static void readPipes(Graph<Node>& graph, string pathname);
-
-
+        static vector<Node> readReservoirs(string const &pathname);
+        static vector<Node> readCities(unordered_map<string,string> &cityDict, string const &pathname);
+        static vector<Node> readStations(string const &pathname);
+        static void readPipes(Graph<Node>& graph, string const &pathname);
 };
 
 
