@@ -177,7 +177,7 @@ vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& grap
 }
 
 //MAYBE????
-void OperationFunctions::reservoirDeactivation(Graph<Node>& graph, Node a) {
+void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 
     Graph<Node> graphCopy1 = graph.getCopy();
     graphCopy1.removeVertex(a);

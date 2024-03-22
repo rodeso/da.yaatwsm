@@ -13,7 +13,7 @@ class OperationFunctions {
         static double maxFlowOfCity(Graph<Node>& graph, Node a);
         static double maxFlowPerCity(Graph<Node>& graph);
         static vector<pair<Node, double>> supplyAndDemand(Graph<Node>& graph);
-        static void reservoirDeactivation(Graph<Node>& graph, Node a);
+        static void deactivation(Graph<Node>& graph, Node a);
 
 };
 

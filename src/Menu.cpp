@@ -112,7 +112,8 @@ void Menu::run() {
                 case5();
                 break;
             case '6':
-                //to be made
+                case6();
+                break;
                 break;
             case '7':
                 //to be made
@@ -163,8 +164,59 @@ void Menu::case4() {} //TODO LATER
 
 void Menu::case5() {
     string reservoirCode;
-    cout << "Please insert the code of the reservoir: ";
+    cout << "Please insert the code of the Reservoir to be removed: ";
     getline(cin,reservoirCode);
     Node del('d', "", 0, reservoirCode, "", 0, 0);
-    OperationFunctions::reservoirDeactivation(graph, del);
+    OperationFunctions::deactivation(graph, del);
+}
+void Menu::case6() {
+    string pumpingCode;
+    cout << "Please insert the code of the Pumping Station to be removed: ";
+    getline(cin, pumpingCode);
+    Node del('u', "", 0, pumpingCode, "", 0, 0);
+    OperationFunctions::deactivation(graph, del);
+}
+
+void Menu::case7() {
+    string A, B;
+    char chara, charb;
+    cout << "Please insert the Service Point A of the Pipe to be removed: ";
+    getline(cin, A);
+    if (A[0] == 'R')
+    {
+        chara = 's';
+    }
+    else if (A[0] == 'P')
+    {
+        chara = 'u';
+    }
+    else if (A[0] == 'C')
+    {
+        chara = 't';
+    }
+    cout << "Please insert the Service Point B of the Pipe to be removed: ";
+    getline(cin, B);
+    if (B[0] == 'R')
+    {
+        charb = 's';
+    }
+    else if (A[0] == 'P')
+    {
+        charb = 'u';
+    }
+    else if (A[0] == 'C')
+    {
+        charb = 't';
+    }
+    Node start(chara,"", 0, A, "", 0, 0);
+    Node end(charb, "", 0, B, "", 0, 0);
+
+}
+
+void Menu::case8() {
+    string city;
+    cout <<  "Please insert the City you want to examine: ";
+    getline(cin, city);
+    Node a('t', "", 0, citydict[city], "", 0, 0);
+
 }
