@@ -172,6 +172,7 @@ void Menu::case3() {
 
 void Menu::case4() {
     //OperationFunctions::balancing(graph);
+    cout << "Connecting to server...\n";
     pair<double,double> what;
     what=OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(graph);
     cout << what.first << " " << what.second << endl;

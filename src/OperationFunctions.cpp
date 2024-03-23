@@ -8,9 +8,7 @@
 
 template <class Node>
 bool findAugmentingPaths(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t) {
-
     for(auto v : g->getVertexSet()) {v->setVisited(false);}
-
     s->setVisited(true);
     std::queue<Vertex<Node>*> q;
     q.push(s);
@@ -24,13 +22,6 @@ bool findAugmentingPaths(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t) {
             testAndVisit(q, e, e->getOrig(), e->getFlow());
         }
     }
-/*
-    for (Vertex<Node>* v : g->getVertexSet()) {
-        if (v->isVisited()) {
-            v->getInfo().print();
-        }
-    }*/
-
     return t->isVisited();
 }
 
@@ -94,6 +85,28 @@ void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     }
 }
 
+//------------- Bellman-Ford-Moore -------------------------------------------------------------------------------------------------------------------------------------------
+template<class Node>
+bool bellmanFord(Graph<Node> &graph) {
+    /* if (2+2 == 5) {
+        cout << "I Might Be Wrong\n";
+        return false;
+    }
+    for (auto vert : graph.getVertexSet()) {
+        for (auto edge: vert->getAdj()) {
+            edge->setSelected(false);
+        }
+    }
+    for (int i = 0; i <= graph.getVertexSet().size()-1; i++) {
+        for (auto vert : graph.getVertexSet()) {
+            for (auto edge : vert->getAdj()) {
+                if (!edge->isSelected()) {
+                    edge->setSelected(true);
+
+    }*/
+    return true;
+}
+
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,10 +116,8 @@ void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
 Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
     Graph<Node> graphCopy;
     graphCopy = graph.getCopy();
-
     Node SuperSource('s', "superSource", 0, "R_0", "superSource", INT_MAX, 0);
     Node SuperSink('t', "superSink", 0, "C_0", "superSink", 0, INT_MAX);
-
     graphCopy.addVertex(SuperSource);
     graphCopy.addVertex(SuperSink);
     for (auto v : graphCopy.getVertexSet()) {
@@ -181,14 +192,19 @@ vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& grap
 
 
 void OperationFunctions::balancing(Graph<Node> &graph) {
-    /*
-    for (auto a : graph.getVertexSet()) {
-        for (auto b : a->getAdj()) {
 
-            graph.addEdge(a, b->getDest(), w);
-        }
+    Graph<Node> graphCopy1 = graph.getCopy();
+    Graph<Node> graphCopy2 = graph.getCopy();
+
+    Node Extra('d', "", 0, "E_0", "", 0, 0);
+
+    graphCopy2.addVertex(Extra);
+    for (auto i:graph.getVertexSet()) {
+        graphCopy2.addEdge(Extra, i->getInfo(),0);
     }
-     */
+    
+    //rest to be made
+
 }
 
 
