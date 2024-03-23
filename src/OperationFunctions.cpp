@@ -24,6 +24,13 @@ bool findAugmentingPaths(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t) {
             testAndVisit(q, e, e->getOrig(), e->getFlow());
         }
     }
+/*
+    for (Vertex<Node>* v : g->getVertexSet()) {
+        if (v->isVisited()) {
+            v->getInfo().print();
+        }
+    }*/
+
     return t->isVisited();
 }
 
@@ -73,17 +80,14 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
 void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
-
     if (s == nullptr || t == nullptr || s == t) {
         cerr << "Error: Invalid source and/or target vertex";
     }
-
     for (auto v : g->getVertexSet()) {
         for (auto e : v->getAdj()) {
             e->setFlow(0);
         }
     }
-
     while (findAugmentingPaths(g, s, t)) {
         double f = findMinResidualAlongPath(s, t);
         augmentFlowAlongPath(s, t, f);
@@ -115,9 +119,7 @@ Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
             continue;
         }
     }
-
     edmondsKarp(&graphCopy, SuperSource,SuperSink);
-
     return graphCopy;
 }
 
@@ -176,6 +178,50 @@ vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& grap
     return res;
 }
 
+
+
+void OperationFunctions::balancing(Graph<Node> &graph) {
+    /*
+    for (auto a : graph.getVertexSet()) {
+        for (auto b : a->getAdj()) {
+
+            graph.addEdge(a, b->getDest(), w);
+        }
+    }
+     */
+}
+
+
+pair<double, double> OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(Graph<Node>& graph) {
+    Graph<Node> graphCopy = maxFlow(graph);
+    double total = 0;
+    int edgeCounter = 0;
+    double maxDiff = 0;
+    for (auto vert : graphCopy.getVertexSet()) {
+        for (auto edge : vert->getAdj()) {
+            edge->setSelected(false);
+        }
+    }
+    for (auto vert : graphCopy.getVertexSet()) {
+        if (vert->getInfo().getCode() != "C_0" && vert->getInfo().getCode() != "R_0") {
+            for (auto edge : vert->getAdj()) {
+                if (edge->getDest()->getInfo().getCode() != "C_0" && edge->getDest()->getInfo().getCode() != "R_0") {
+                    if (!edge->isSelected()) {
+                        edgeCounter++;
+                        //cout << edge->getWeight()-edge->getFlow() << vert->getInfo().getCode() << edge->getDest()->getInfo().getCode() << "\n" ;
+                        total+=edge->getWeight()-edge->getFlow();
+                        maxDiff=max(maxDiff,edge->getWeight()-edge->getFlow());
+                        edge->setSelected(true);
+                    }
+                }
+            }
+        }
+    }
+    return {total/edgeCounter,maxDiff};
+}
+
+
+
 //MAYBE????
 void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 
@@ -211,6 +257,11 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, Node end) {
     Graph<Node> graphAfterEdgeRemoval = graph.getCopy();
     graphAfterEdgeRemoval.removeEdge(start, end);
+    for (auto a : graphAfterEdgeRemoval.findVertex(end)->getAdj()) {
+        if (a->getDest()->getInfo() == start) {
+            graphAfterEdgeRemoval.removeEdge(end, start);
+        }
+    }
     auto original = supplyAndDemand(graph);
     auto res = supplyAndDemand(graphAfterEdgeRemoval);
     double diff = 0;
@@ -232,7 +283,7 @@ void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, No
             diff = b.second;
         }
         if (diff > 0) {
-            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after removal of pipe from " << start.getCode() << " to " << end.getCode() << ": " << bus + diff << " (difference of " << diff << ")" << endl;
+            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after deactivation of pipe from " << start.getCode() << " to " << end.getCode() << ": " << bus + diff << " (difference of " << diff << ")" << endl;
         }
     }
 }
@@ -262,14 +313,3 @@ void OperationFunctions::criticalPipesOfCity(Graph<Node> &graph, Node city) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

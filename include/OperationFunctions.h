@@ -13,6 +13,8 @@ class OperationFunctions {
         static double maxFlowOfCity(Graph<Node>& graph, Node const &a);
         static double maxFlowPerCity(Graph<Node>& graph);
         static vector<pair<Node, double>> supplyAndDemand(Graph<Node>& graph);
+        static void balancing(Graph<Node>& graph);
+        static pair<double,double> averageAndMaxOfDifferenceOfCapAndFlow(Graph<Node>& graph);
         static void deactivation(Graph<Node>& graph, Node a);
         //given a city determine essential pipelines
         static void criticalPipesOfCity(Graph<Node>& graph, Node city);

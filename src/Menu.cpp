@@ -62,6 +62,7 @@ void Menu::run() {
         cout << string(LINE_SIZE_, '-') << endl;
         cout << "Loading data contents..." << endl;
         cout << string(LINE_SIZE_, '-') << endl;
+
         for (auto n : graph.getVertexSet()) {
             n->getInfo().print();
         }
@@ -168,7 +169,13 @@ void Menu::case3() {
         cout << endl;
     }
 }
-void Menu::case4() {} //TODO LATER
+
+void Menu::case4() {
+    //OperationFunctions::balancing(graph);
+    pair<double,double> what;
+    what=OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(graph);
+    cout << what.first << " " << what.second << endl;
+}
 
 void Menu::case5() {
     string reservoirCode;
