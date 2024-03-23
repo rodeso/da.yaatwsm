@@ -83,7 +83,8 @@ void Menu::run() {
         cout << "4 - Network balancing tool." << endl; //T2.3
         cout << "5 - Water reservoirs deactivation analysis." << endl; //T3.1
         cout << "6 - Pumping stations deactivation analysis." << endl; //T3.2
-        cout << "7 - Critical pipes analysis." << endl; //T3.3
+        cout << "7 - Affected cities by given pipe analysis." << endl; //T3.3
+        cout << "8 - Critical pipes by given city analysis." << endl; //T3.3
         cout << "0 - Exit." << endl;
         cout << string(LINE_SIZE_, '-') << endl;
         cout << "Please select the task you wish to perform by inputting its number: ";
@@ -91,7 +92,7 @@ void Menu::run() {
         cout << string(LINE_SIZE_, '-') << endl;
         cout << endl;
         if (decision.size() != 1) {
-            cout << "Invalid input. Please enter a number between 0 and 7: " << endl;
+            cout << "Invalid input. Please enter a number between 0 and 8: " << endl;
             continue;
         }
         switch (decision[0]) {
@@ -131,7 +132,7 @@ void Menu::run() {
                 cout << "Goodbye!" << endl;
                 exit(0);
             default:
-                cout << "Invalid input. Please enter a number between 0 and 7: " << endl;
+                cout << "Invalid input. Please enter a number between 0 and 8: " << endl;
                 break;
         }
     }
@@ -212,8 +213,7 @@ void Menu::case7() {
     }
     Node start(charA,"", 0, A, "", 0, 0);
     Node end(charB, "", 0, B, "", 0, 0);
-
-
+    OperationFunctions::citiesOfCriticalPipe(graph, start, end);
 }
 
 void Menu::case8() {
@@ -221,5 +221,6 @@ void Menu::case8() {
     cout <<  "Please insert the City you want to examine: ";
     getline(cin, city);
     Node a('t', "", 0, cityDict[city], "", 0, 0);
+    OperationFunctions::criticalPipesOfCity(graph,a);
 
 }

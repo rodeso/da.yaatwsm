@@ -183,7 +183,7 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
     graphCopy1.removeVertex(a);
     auto original = supplyAndDemand(graph);
     auto res = supplyAndDemand(graphCopy1);
-    double deficit = 0;
+    double diff = 0;
     if (res.empty()) { cerr << "Error: WHAT??\n";}
 
     for (auto b : res) {
@@ -196,14 +196,73 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
             }
         }
         if (hasOriginalDeficit) {
-            deficit = b.second - bus;
+            diff = b.second - bus;
         }
-        if (deficit > 0) {
-            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after " << a.getCode() << "'s deactivation: " << bus+deficit << " (difference of " << deficit << ")" << endl;
+        else {
+            diff = b.second;
+        }
+        if (diff > 0) {
+            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after " << a.getCode() << "'s deactivation: " << bus+diff << " (difference of " << diff << ")" << endl;
         }
 
     }
 }
+
+void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, Node end) {
+    Graph<Node> graphAfterEdgeRemoval = graph.getCopy();
+    graphAfterEdgeRemoval.removeEdge(start, end);
+    auto original = supplyAndDemand(graph);
+    auto res = supplyAndDemand(graphAfterEdgeRemoval);
+    double diff = 0;
+    if (res.empty()) { cerr << "Error: WHAT??\n";}
+
+     for (auto b : res) {
+        double bus = 0;
+        bool hasOriginalDeficit = false;
+        for (auto c : original) {
+            if (b.first.getCode() == c.first.getCode()) {
+                hasOriginalDeficit = true;
+                bus = c.second;
+            }
+        }
+        if (hasOriginalDeficit) {
+            diff = b.second - bus;
+        }
+        else {
+            diff = b.second;
+        }
+        if (diff > 0) {
+            cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after removal of pipe from " << start.getCode() << " to " << end.getCode() << ": " << bus + diff << " (difference of " << diff << ")" << endl;
+        }
+    }
+}
+
+
+void OperationFunctions::criticalPipesOfCity(Graph<Node> &graph, Node city) {
+    //find max flow of city
+    double originalFlowOfCity = maxFlowOfCity(graph, city);
+    //set all edges to unselected
+    for (auto vert : graph.getVertexSet()) {
+        for (auto edge: vert->getAdj()) {
+            edge->setSelected(false);
+        }
+    }
+    //test pipe by pipe if it is critical
+    for (auto vert : graph.getVertexSet()) {
+        for (auto edge : vert->getAdj()) {
+            if (!edge->isSelected()) {
+                edge->setSelected(true);
+                Graph<Node> graphCopy = graph.getCopy();
+                graphCopy.removeEdge(vert->getInfo(),edge->getDest()->getInfo());
+                auto res = maxFlowOfCity(graphCopy, city);
+                if (res < originalFlowOfCity) {
+                    cout << "Pipe from " <<  vert->getInfo().getCode() << " to " << edge->getDest()->getInfo().getCode() << " is critical, causing a flow deficit of: " << originalFlowOfCity - res << endl;
+                }
+            }
+        }
+    }
+}
+
 
 
 
