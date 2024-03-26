@@ -10,7 +10,6 @@ add_executable(DA1G195 main.cpp
         include/Graph.h
         src/ReadFunctions.cpp
         include/ReadFunctions.h
-        src/Node.cpp
         include/Node.h
         include/Include.h
         src/OperationFunctions.cpp

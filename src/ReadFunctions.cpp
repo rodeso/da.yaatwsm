@@ -1,6 +1,8 @@
 #include "../include/ReadFunctions.h"
 
-
+/**
+* @brief Function that reads all the Reservoirs information in the selected data folder, allowing for the creation of the nodes of its type, and the population of the graph.
+*/
 vector<Node> ReadFunctions::readReservoirs(string const &pathname) {
     vector<Node> nodesReservoirs;
 
@@ -28,6 +30,10 @@ vector<Node> ReadFunctions::readReservoirs(string const &pathname) {
     file.close();
     return nodesReservoirs;
 }
+
+/**
+* @brief Function that reads all the Cities information in the selected data folder, allowing for the creation of the nodes of its type, and the population of the graph and the dictionary.
+*/
 vector<Node> ReadFunctions::readCities(unordered_map<string, string> &cityDict, string const &pathname) {
     vector<Node> nodesCities;
 
@@ -60,6 +66,9 @@ vector<Node> ReadFunctions::readCities(unordered_map<string, string> &cityDict, 
     return nodesCities;
 }
 
+/**
+* @brief Function that reads all the Stations information in the selected data folder, allowing for the creation of the nodes of its type, and the population of the graph.
+*/
 vector<Node> ReadFunctions::readStations(string const &pathname) {
     vector<Node> nodesStations;
 
@@ -85,6 +94,9 @@ vector<Node> ReadFunctions::readStations(string const &pathname) {
     return nodesStations;
 }
 
+/**
+* @brief Function that reads all the Pipes information in the selected data folder, allowing for the creation of the edges in the graph.
+*/
 void ReadFunctions::readPipes(Graph<Node> &graph, std::string const &pathname) {
     ifstream file(pathname);
     if (!file.is_open()) {

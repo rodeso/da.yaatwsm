@@ -3,6 +3,10 @@
 
 #include "Include.h"
 
+/**
+ * @brief Class that represents the various types of Nodes which the Vertexes may represent in the graph: Cities (sinks), Pumping Stations and Reservoirs (Sources).
+ */
+
 class Node {
     private:
         char type_; // s (source); t (sink); u (station)
@@ -16,7 +20,9 @@ class Node {
 
 
     public:
-        //Constructor
+        /**
+        * @brief Constructor of the Node. The type of the Node depends on the values of its atributes.
+        */
         Node(char type, string name, int id, string code, string municipality, int quantity, double demand) {
             type_=type;
             name_=name;
@@ -91,7 +97,9 @@ class Node {
             }
         }
 
-    //Print
+        /**
+        * @brief Function that prints the information of the various types of Nodes that are being made according to the chosen data folder.
+        */
         void print() {
         if (this->isSource()) {
             cout << "Type: " << getType() << "   Name: " << name_ << "   ID: " << id_ << "   Code: " << code_ << "   Hex Code: " << stringToHex(code_) << "   Municipality: " << municipality_ << "   Max Delivery: " << quantity_ << endl;

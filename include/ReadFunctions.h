@@ -4,6 +4,9 @@
 #include "Graph.h"
 #include "Node.h"
 
+/**
+ * @brief Class that represents the functions related to the reading and organizing of the system data.
+ */
 
 class ReadFunctions {
     private:

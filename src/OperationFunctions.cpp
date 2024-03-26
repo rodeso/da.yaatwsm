@@ -67,7 +67,9 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
     }
 }
 
-
+/**
+* @brief Function that applies the adapted Edmonds-Karp algorithm to the selected graph.
+*/
 void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
@@ -112,7 +114,9 @@ bool bellmanFord(Graph<Node> &graph) {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+/**
+* @brief Function that calculates the max flow for the entire graph.
+*/
 Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
     Graph<Node> graphCopy;
     graphCopy = graph.getCopy();
@@ -135,7 +139,9 @@ Graph<Node> OperationFunctions::maxFlow(Graph<Node>& graph) {
 }
 
 
-
+/**
+* @brief Function that analysis the max flow for a given city.
+*/
 double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node const &a) {
     Graph<Node> graphCopy;
     graphCopy = maxFlow(graph);
@@ -149,7 +155,9 @@ double OperationFunctions::maxFlowOfCity(Graph<Node>& graph, Node const &a) {
 }
 
 
-
+/**
+* @brief Function that returns the max flow for all the existing cities in the selected data folder.
+*/
 double OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
     double max = 0.0;
     Graph<Node> graphCopy;
@@ -202,7 +210,7 @@ void OperationFunctions::balancing(Graph<Node> &graph) {
     for (auto i:graph.getVertexSet()) {
         graphCopy2.addEdge(Extra, i->getInfo(),0);
     }
-    
+
     //rest to be made
 
 }

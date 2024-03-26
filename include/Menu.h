@@ -6,11 +6,20 @@
 #include "ReadFunctions.h"
 #include "OperationFunctions.h"
 
+/**
+ * @brief Class that represents the system menus' interface and all of its stored data.
+ */
 
 class Menu {
 
     private:
+        /**
+        * @brief Graph structure.
+        */
         Graph<Node> graph;
+        /**
+        * @brief Dictionary to help relate the names of the cities with its respective code.
+        */
         unordered_map<string,string> cityDict;
 
     public:
@@ -23,10 +32,6 @@ class Menu {
         void case6();
         void case7();
         void case8();
-
-
-
-
 
 
 };

@@ -18,13 +18,6 @@
 
 static int LINE_SIZE_ = 130;
 
-
 using namespace std;
-
-
-
-
-
-
 
 #endif //YAATWSM_INCLUDE_H

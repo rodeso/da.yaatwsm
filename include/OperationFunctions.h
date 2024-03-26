@@ -5,6 +5,10 @@
 #include "Node.h"
 #include "Graph.h"
 
+/**
+ * @brief Class that represents the multiple functions related to the main operations of the system.
+ */
+
 class OperationFunctions {
     private:
 

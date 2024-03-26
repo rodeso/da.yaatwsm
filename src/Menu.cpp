@@ -1,6 +1,8 @@
 #include "../include/Menu.h"
 
-
+/** -------------------------------------------------------------------------------------------------------------------------
+ * @brief Function that runs the first menu of the app (selection of the source of the data to be used), and later the main menu (with all the possible operations).
+ * */
 void Menu::run() {
     // Graph
     graph = Graph<Node>();
