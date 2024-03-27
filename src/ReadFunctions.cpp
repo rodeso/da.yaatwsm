@@ -21,7 +21,8 @@ vector<Node> ReadFunctions::readReservoirs(string const &pathname) {
         string reservoir, municipality, code, id, maximumDelivery;
 
 
-        if (getline(ss, reservoir, ',') && getline(ss, municipality, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, maximumDelivery, ',')) {
+        if (getline(ss, reservoir, ',') && getline(ss, municipality, ',') 
+			&& getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, maximumDelivery, ',')) {
             nodesReservoirs.push_back(Node('s', reservoir, stoi(id), code, municipality, stoi(maximumDelivery), 0));
         } else {
             cerr << "Error (302): Reservoir Loading Error";
@@ -52,7 +53,8 @@ vector<Node> ReadFunctions::readCities(unordered_map<string, string> &cityDict, 
         istringstream ss(line);
         string city, code, id, population, demand;
 
-        if (getline(ss, city, ',') && getline(ss, id, ',') && getline(ss, code, ',') && getline(ss, demand, ',') && getline(ss, population, ',')) {
+        if (getline(ss, city, ',') && getline(ss, id, ',') && getline(ss, code, ',') 
+			&& getline(ss, demand, ',') && getline(ss, population, ',')) {
             nodesCities.push_back(Node('t', Node::removeCarriageReturn(city), stoi(id), code,"", stoi(population), stod(demand)));
             cityDict[Node::removeCarriageReturn(city)] = Node::removeCarriageReturn(code);
         } else {
