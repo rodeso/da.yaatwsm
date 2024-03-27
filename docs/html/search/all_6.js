@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operationfunctions_0',['OperationFunctions',['../class_operation_functions.html',1,'']]]
+  ['node_25',['Node',['../class_node.html',1,'Node'],['../class_node.html#a1bcd5ed97d06ee607f561d6bc24a6f2f',1,'Node::Node()']]]
 ];

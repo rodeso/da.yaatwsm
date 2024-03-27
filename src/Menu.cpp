@@ -83,11 +83,12 @@ void Menu::run() {
         cout << "1 - Maximum amount of reachable water of a given city." << endl; //T2.1
         cout << "2 - List of maximum amount of reachable water per city." << endl; //T2.1
         cout << "3 - Water reservoirs supply and demand status." << endl; //T2.2
-        cout << "4 - Network balancing tool." << endl; //T2.3
+        cout << "4 - Analytics of Capacity and Flow." << endl; //T2.3
         cout << "5 - Water reservoirs deactivation analysis." << endl; //T3.1
         cout << "6 - Pumping stations deactivation analysis." << endl; //T3.2
         cout << "7 - Affected cities by given pipe analysis." << endl; //T3.3
         cout << "8 - Critical pipes by given city analysis." << endl; //T3.3
+        cout << "9 - Credits." << endl;
         cout << "0 - Exit." << endl;
         cout << string(LINE_SIZE_, '-') << endl;
         cout << "Please select the task you wish to perform by inputting its number: ";
@@ -95,7 +96,7 @@ void Menu::run() {
         cout << string(LINE_SIZE_, '-') << endl;
         cout << endl;
         if (decision.size() != 1) {
-            cout << "Invalid input. Please enter a number between 0 and 8: " << endl;
+            cout << "Invalid input. Please enter a number between 0 and 9: " << endl;
             continue;
         }
         switch (decision[0]) {
@@ -131,11 +132,15 @@ void Menu::run() {
                 case8();
                 sleep(5);
                 break;
+            case '9':
+                case9();
+                sleep(5);
+                break;
             case '0':
                 cout << "Goodbye!" << endl;
                 exit(0);
             default:
-                cout << "Invalid input. Please enter a number between 0 and 8: " << endl;
+                cout << "Invalid input. Please enter a number between 0 and 9: " << endl;
                 break;
         }
     }
@@ -173,11 +178,14 @@ void Menu::case3() {
 }
 
 void Menu::case4() {
-    //OperationFunctions::balancing(graph);
-    cout << "Connecting to server...\n";
-    pair<double,double> what;
-    what=OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(graph);
-    cout << what.first << " " << what.second << endl;
+    pair<double,double> averageAndMax;
+    double variances = OperationFunctions::variance(graph);
+    averageAndMax=OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(graph);
+
+    cout << "Average of the differences between Capacities and Flows in all pipelines: " << averageAndMax.first << endl;
+    cout << "Maximum difference between Capacity and Flow, out of all pipelines: " << averageAndMax.second << endl;
+    cout << "Variance of the differences between Capacities and Flows in all pipelines: " << variances << endl;
+    cout << endl;
 }
 
 void Menu::case5() {
@@ -233,4 +241,15 @@ void Menu::case8() {
     Node a('t', "", 0, cityDict[city], "", 0, 0);
     OperationFunctions::criticalPipesOfCity(graph,a);
 
+}
+
+void Menu::case9() {
+    cout << "This program was created by:" << endl;
+    cout << string(2*(LINE_SIZE_/5), ' ');
+    cout << "Afonso Pedro Maia de Castro (up202208026@up.pt)" << endl;
+    cout << string(2*(LINE_SIZE_/5), ' ');
+    cout << "Pedro Trindade Gonçalves Cadilhe Santos (up202205900@up.pt)" << endl;
+    cout << string(2*(LINE_SIZE_/5), ' ');
+    cout << "Rodrigo Dias Ferreira Loureiro de Sousa (up202205751@up.pt)" << endl;
+    cout << "Date: March 2024" << endl;
 }

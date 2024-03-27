@@ -1,8 +1,9 @@
 #include "../include/ReadFunctions.h"
 
 /**
-* @brief Function that reads all the Reservoirs information in the selected data folder, allowing for the creation of the nodes of its type, and the population of the graph.
-*/
+ * @brief Function that reads all the Reservoirs information in the selected data folder, allowing for the creation of the nodes of its type, and the population of the graph.
+ * @details Complexity
+ */
 vector<Node> ReadFunctions::readReservoirs(string const &pathname) {
     vector<Node> nodesReservoirs;
 

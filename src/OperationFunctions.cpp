@@ -70,7 +70,7 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
 /**
 * @brief Function that applies the adapted Edmonds-Karp algorithm to the selected graph, with the given source and target.
 */
-void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
+void OperationFunctions::edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
     if (s == nullptr || t == nullptr || s == t) {
@@ -86,32 +86,6 @@ void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
         augmentFlowAlongPath(s, t, f);
     }
 }
-
-//------------- Bellman-Ford-Moore -------------------------------------------------------------------------------------------------------------------------------------------
-template<class Node>
-bool bellmanFord(Graph<Node> &graph) {
-    /* if (2+2 == 5) {
-        cout << "I Might Be Wrong\n";
-        return false;
-    }
-    for (auto vert : graph.getVertexSet()) {
-        for (auto edge: vert->getAdj()) {
-            edge->setSelected(false);
-        }
-    }
-    for (int i = 0; i <= graph.getVertexSet().size()-1; i++) {
-        for (auto vert : graph.getVertexSet()) {
-            for (auto edge : vert->getAdj()) {
-                if (!edge->isSelected()) {
-                    edge->setSelected(true);
-
-    }*/
-    return true;
-}
-
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 /**
@@ -200,23 +174,6 @@ vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& grap
 }
 
 
-
-void OperationFunctions::balancing(Graph<Node> &graph) {
-
-    Graph<Node> graphCopy1 = graph.getCopy();
-    Graph<Node> graphCopy2 = graph.getCopy();
-
-    Node Extra('d', "", 0, "E_0", "", 0, 0);
-
-    graphCopy2.addVertex(Extra);
-    for (auto i:graph.getVertexSet()) {
-        graphCopy2.addEdge(Extra, i->getInfo(),0);
-    }
-
-    //rest to be made
-
-}
-
 /**
 * @brief Function that calculates the max value and the average of all differences between the flow and the capacity of all the pipes (edges).
 */
@@ -236,7 +193,6 @@ pair<double, double> OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(G
                 if (edge->getDest()->getInfo().getCode() != "C_0" && edge->getDest()->getInfo().getCode() != "R_0") {
                     if (!edge->isSelected()) {
                         edgeCounter++;
-                        //cout << edge->getWeight()-edge->getFlow() << vert->getInfo().getCode() << edge->getDest()->getInfo().getCode() << "\n" ;
                         total+=edge->getWeight()-edge->getFlow();
                         maxDiff=max(maxDiff,edge->getWeight()-edge->getFlow());
                         edge->setSelected(true);
@@ -246,6 +202,37 @@ pair<double, double> OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(G
         }
     }
     return {total/edgeCounter,maxDiff};
+}
+
+
+/**
+* @brief Function that calculates the variance of all differences between the flow and the capacity of all the pipes (edges).
+*/
+double OperationFunctions::variance(Graph<Node>& graph) {
+    Graph<Node> graphCopy = maxFlow(graph);
+    double variance = 0;
+    int edgeCounter = 0;
+    double avg = averageAndMaxOfDifferenceOfCapAndFlow(graphCopy).first;
+    for (auto vert : graphCopy.getVertexSet()) {
+        for (auto edge : vert->getAdj()) {
+            edge->setSelected(false);
+        }
+    }
+    for (auto vert : graphCopy.getVertexSet()) {
+        if (vert->getInfo().getCode() != "C_0" && vert->getInfo().getCode() != "R_0") {
+            for (auto edge : vert->getAdj()) {
+                if (edge->getDest()->getInfo().getCode() != "C_0" && edge->getDest()->getInfo().getCode() != "R_0") {
+                    if (!edge->isSelected()) {
+                        edgeCounter++;
+                        double dif = edge->getFlow() - avg;
+                        variance += dif * dif;
+                        edge->setSelected(true);
+                    }
+                }
+            }
+        }
+    }
+    return variance / (edgeCounter - 1);
 }
 
 

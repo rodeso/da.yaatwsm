@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['citydict_0',['cityDict',['../class_menu.html#ada4c9922349f9eb133a6e6e1d3e66f4c',1,'Menu']]]
+  ['averageandmaxofdifferenceofcapandflow_0',['averageAndMaxOfDifferenceOfCapAndFlow',['../class_operation_functions.html#add53725acdfe90f28025549208c8b1e1',1,'OperationFunctions']]]
 ];

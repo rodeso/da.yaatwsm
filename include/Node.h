@@ -1,3 +1,4 @@
+
 #ifndef YAATWSM_NODE_H
 #define YAATWSM_NODE_H
 
@@ -96,7 +97,6 @@ class Node {
                 return "";
             }
         }
-
         /**
         * @brief Function that prints the information of the various types of Nodes that are being made according to the chosen data folder.
         */
