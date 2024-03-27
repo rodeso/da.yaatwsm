@@ -68,7 +68,7 @@ void augmentFlowAlongPath(Vertex<Node>* s, Vertex<Node>* t, double f) {
 }
 
 /**
-* @brief Function that applies the adapted Edmonds-Karp algorithm to the selected graph.
+* @brief Function that applies the adapted Edmonds-Karp algorithm to the selected graph, with the given source and target.
 */
 void edmondsKarp(Graph<Node> *g, Node const &source, Node const &target) {
     Vertex<Node>* s = g->findVertex(source);
@@ -176,7 +176,9 @@ double OperationFunctions::maxFlowPerCity(Graph<Node>& graph) {
 }
 
 
-
+/**
+* @brief Function that evaluates which cities cannot be supplied with the desired water rate level, indicating the amount of water flow in deficit.
+*/
 vector<pair<Node, double>> OperationFunctions::supplyAndDemand(Graph<Node>& graph) {
     vector<pair<Node, double>> res;
     Graph<Node> graphCopy;
@@ -215,7 +217,9 @@ void OperationFunctions::balancing(Graph<Node> &graph) {
 
 }
 
-
+/**
+* @brief Function that calculates the max value and the average of all differences between the flow and the capacity of all the pipes (edges).
+*/
 pair<double, double> OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(Graph<Node>& graph) {
     Graph<Node> graphCopy = maxFlow(graph);
     double total = 0;
@@ -246,7 +250,9 @@ pair<double, double> OperationFunctions::averageAndMaxOfDifferenceOfCapAndFlow(G
 
 
 
-//MAYBE????
+/**
+* @brief Function that calculates the changes in the cities water supply after the deactivation of either a Reservoir or a Pumping Station. Calculates affected cities and water supply deficits.
+*/
 void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 
     Graph<Node> graphCopy1 = graph.getCopy();
@@ -278,6 +284,10 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
     }
 }
 
+
+/**
+* @brief Function that calculates the affected cities and its water supply deficits after the deactivation/rupture of a given pipeline.
+*/
 void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, Node end) {
     Graph<Node> graphAfterEdgeRemoval = graph.getCopy();
     graphAfterEdgeRemoval.removeEdge(start, end);
@@ -312,7 +322,9 @@ void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, No
     }
 }
 
-
+/**
+* @brief Function that calculates the pipelines that, if deactivated or ruptured, affect the water supply of a given city.
+*/
 void OperationFunctions::criticalPipesOfCity(Graph<Node> &graph, Node city) {
     //find max flow of city
     double originalFlowOfCity = maxFlowOfCity(graph, city);
