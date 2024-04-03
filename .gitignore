@@ -36,4 +36,4 @@
 
 # CMake files
 cmake-build-debug/*
-
+build/*
