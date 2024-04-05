@@ -53,6 +53,8 @@ class Node {
                 return "Station";
             if (type_ == 'd')
                 return "Dummy";
+            
+            throw invalid_argument("Invalid type_ value: " + to_string(type_));
         }
         bool isSource() {
             if (type_ == 's')
