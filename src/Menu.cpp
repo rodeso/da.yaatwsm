@@ -171,7 +171,7 @@ void Menu::case3() {
     else {
         cout << "The cities that cannot be supplied by the desired water rate level are listed bellow, with the amount of water flow in deficit." << endl;
         for (auto t : res) {
-            cout << t.first.getCode() << " --> " << t.second << endl;
+            cout << t.first.getName() << " (" << t.first.getCode() << ") --> " << t.second << endl;
         }
         cout << endl;
     }
