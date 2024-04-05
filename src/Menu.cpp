@@ -157,13 +157,15 @@ void Menu::case1() {
 
 void Menu::case2() {
     double max = OperationFunctions::maxFlowPerCity(graph);
-    cout << endl;
+
+    cout << string(LINE_SIZE_, '-') << endl;
     cout << "Total flow: " << max << endl;
     cout << endl;
 }
 
 void Menu::case3() {
     vector<pair<Node, double>> res = OperationFunctions::supplyAndDemand(graph);
+    
     if (res.empty()) {
         cout << "All cities are supplied!";
     }
@@ -194,6 +196,8 @@ void Menu::case5() {
     Node del('d', "", 0, reservoirCode, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
+    cout << endl;
+
 }
 
 void Menu::case6() {
@@ -203,6 +207,8 @@ void Menu::case6() {
     Node del('u', "", 0, pumpingCode, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
+    cout << endl;
+
 }
 
 void Menu::case7() {
@@ -234,6 +240,7 @@ void Menu::case7() {
     Node end(charB, "", 0, B, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::citiesOfCriticalPipe(graph, start, end);
+    cout << endl;
 }
 
 void Menu::case8() {
@@ -243,7 +250,7 @@ void Menu::case8() {
     Node a('t', "", 0, cityDict[city], "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::criticalPipesOfCity(graph,a);
-
+    cout << endl;
 }
 
 void Menu::case9() {
@@ -255,4 +262,6 @@ void Menu::case9() {
     cout << string(2*(LINE_SIZE_/5), ' ');
     cout << "Rodrigo Dias Ferreira Loureiro de Sousa (up202205751@up.pt)" << endl;
     cout << "Date: March 2024" << endl;
+    cout << endl;
+
 }

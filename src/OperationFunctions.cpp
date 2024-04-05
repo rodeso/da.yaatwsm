@@ -74,7 +74,8 @@ void OperationFunctions::edmondsKarp(Graph<Node> *g, Node const &source, Node co
     Vertex<Node>* s = g->findVertex(source);
     Vertex<Node>* t = g->findVertex(target);
     if (s == nullptr || t == nullptr || s == t) {
-        cerr << "Error: Invalid source and/or target vertex";
+        cerr << "Error: Invalid source and/or target vertex\n";
+        return;
     }
     for (auto v : g->getVertexSet()) {
         for (auto e : v->getAdj()) {
@@ -243,11 +244,18 @@ double OperationFunctions::variance(Graph<Node>& graph) {
 void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 
     Graph<Node> graphCopy1 = graph.getCopy();
-    graphCopy1.removeVertex(a);
+    if (!graphCopy1.removeVertex(a)) {
+        cerr << "Error: Invalid Input\n";
+        return;
+    }
+    bool noCrit = true;
     auto original = supplyAndDemand(graph);
     auto res = supplyAndDemand(graphCopy1);
     double diff = 0;
-    if (res.empty()) { cerr << "Error: WHAT??\n";}
+    if (res.empty()) { 
+        cerr << "Error: WHAT??\n";        
+        return;
+    }
 
     for (auto b : res) {
         double bus = 0;
@@ -265,9 +273,13 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
             diff = b.second;
         }
         if (diff > 0) {
+            noCrit = false;
             cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after " << a.getCode() << "'s deactivation: " << bus+diff << " (difference of " << diff << ")" << endl;
         }
 
+    }
+    if (noCrit) {
+        cout << "No cities are affected." << endl;
     }
 }
 
@@ -277,8 +289,11 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 */
 void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, Node end) {
     Graph<Node> graphAfterEdgeRemoval = graph.getCopy();
-    bool none = true;
-    graphAfterEdgeRemoval.removeEdge(start, end);
+    bool noCrit = true;
+    if (!graphAfterEdgeRemoval.removeEdge(start, end)) {
+        cerr << "Error: Invalid Input\n";
+        return;
+    }
     for (auto a : graphAfterEdgeRemoval.findVertex(end)->getAdj()) {
         if (a->getDest()->getInfo() == start) {
             graphAfterEdgeRemoval.removeEdge(end, start);
@@ -287,7 +302,10 @@ void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, No
     auto original = supplyAndDemand(graph);
     auto res = supplyAndDemand(graphAfterEdgeRemoval);
     double diff = 0;
-    if (res.empty()) { cerr << "Error: WHAT??\n";}
+    if (res.empty()) { 
+        cerr << "Error: WHAT??\n";
+        return;
+    }
 
      for (auto b : res) {
         double bus = 0;
@@ -305,20 +323,20 @@ void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, No
             diff = b.second;
         }
         if (diff > 0) {
-            none = false;
+            noCrit = false;
             cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after deactivation of pipe from " << start.getCode() << " to " << end.getCode() << ": " << bus + diff << " (difference of " << diff << ")" << endl;
         }
     }
-     if (none) {
-         cout << string(LINE_SIZE_, '-') << endl;
-         cout << "No cities are affected." << endl;
-     }
+    if (noCrit) {
+        cout << "No cities are affected." << endl;
+    }
 }
 
 /**
 * @brief Function that calculates the pipelines that, if deactivated or ruptured, affect the water supply of a given city.
 */
 void OperationFunctions::criticalPipesOfCity(Graph<Node> &graph, Node city) {
+    bool noCrit = true;
     //find max flow of city
     double originalFlowOfCity = maxFlowOfCity(graph, city);
     //set all edges to unselected
@@ -336,9 +354,13 @@ void OperationFunctions::criticalPipesOfCity(Graph<Node> &graph, Node city) {
                 graphCopy.removeEdge(vert->getInfo(),edge->getDest()->getInfo());
                 auto res = maxFlowOfCity(graphCopy, city);
                 if (res < originalFlowOfCity) {
+                    noCrit = false;
                     cout << "Pipe from " <<  vert->getInfo().getCode() << " to " << edge->getDest()->getInfo().getCode() << " is critical, causing a flow deficit of: " << originalFlowOfCity - res << endl;
                 }
             }
         }
+    }
+    if (noCrit) {
+        cout << "There are no critical Pipes for this city." << endl;
     }
 }
