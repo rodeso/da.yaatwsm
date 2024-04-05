@@ -69,9 +69,7 @@ void Menu::run() {
             n->getInfo().print();
         }
         cout << "Loading system..." << endl;
-        cout << string(LINE_SIZE_, '-') << endl;
         ReadFunctions::readPipes(graph, path + "Pipes.csv");
-        sleep(5);
         break;
     }
     //Real Menu
@@ -152,6 +150,7 @@ void Menu::case1() {
     cout << "Please insert the name of the city: ";
     getline(cin,city);
     Node a('d', "", 0, (cityDict[city]), "", 0, 0);
+    cout << string(LINE_SIZE_, '-') << endl;
     cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
     cout << endl;
 }
@@ -193,6 +192,7 @@ void Menu::case5() {
     cout << "Please insert the code of the Reservoir to be removed: ";
     getline(cin,reservoirCode);
     Node del('d', "", 0, reservoirCode, "", 0, 0);
+    cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
 }
 
@@ -201,6 +201,7 @@ void Menu::case6() {
     cout << "Please insert the code of the Pumping Station to be removed: ";
     getline(cin, pumpingCode);
     Node del('u', "", 0, pumpingCode, "", 0, 0);
+    cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
 }
 
@@ -231,6 +232,7 @@ void Menu::case7() {
     }
     Node start(charA,"", 0, A, "", 0, 0);
     Node end(charB, "", 0, B, "", 0, 0);
+    cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::citiesOfCriticalPipe(graph, start, end);
 }
 
@@ -239,6 +241,7 @@ void Menu::case8() {
     cout <<  "Please insert the City you want to examine: ";
     getline(cin, city);
     Node a('t', "", 0, cityDict[city], "", 0, 0);
+    cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::criticalPipesOfCity(graph,a);
 
 }

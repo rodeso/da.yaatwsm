@@ -277,6 +277,7 @@ void OperationFunctions::deactivation(Graph<Node>& graph, Node a) {
 */
 void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, Node end) {
     Graph<Node> graphAfterEdgeRemoval = graph.getCopy();
+    bool none = true;
     graphAfterEdgeRemoval.removeEdge(start, end);
     for (auto a : graphAfterEdgeRemoval.findVertex(end)->getAdj()) {
         if (a->getDest()->getInfo() == start) {
@@ -304,9 +305,14 @@ void OperationFunctions::citiesOfCriticalPipe(Graph<Node>& graph, Node start, No
             diff = b.second;
         }
         if (diff > 0) {
+            none = false;
             cout << b.first.getCode() << " (" << b.first.getName() << ")  -->  Original deficit: " << bus << "  -->  Deficit after deactivation of pipe from " << start.getCode() << " to " << end.getCode() << ": " << bus + diff << " (difference of " << diff << ")" << endl;
         }
     }
+     if (none) {
+         cout << string(LINE_SIZE_, '-') << endl;
+         cout << "No cities are affected." << endl;
+     }
 }
 
 /**
