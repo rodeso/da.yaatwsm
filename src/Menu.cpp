@@ -1,5 +1,8 @@
 #include "../include/Menu.h"
-
+void waitForInput() {
+    string input;
+    getline(std::cin, input); // Wait for user to press Enter
+}
 /** -------------------------------------------------------------------------------------------------------------------------
  * @brief Function that runs the first menu of the app (selection of the source of the data to be used), and later the main menu (with all the possible operations).
  * */
@@ -100,39 +103,39 @@ void Menu::run() {
         switch (decision[0]) {
             case '1':
                 case1();
-                //sleep(5);
+                waitForInput();
                 break;
             case '2':
                 case2();
-                //sleep(5);
+                waitForInput();
                 break;
             case '3':
                 case3();
-                //sleep(5);
+                waitForInput();
                 break;
             case '4':
                 case4();
-                //sleep(5);
+                waitForInput();
                 break;
             case '5':
                 case5();
-                //sleep(5);
+                waitForInput();
                 break;
             case '6':
                 case6();
-                //sleep(5);
+                waitForInput();
                 break;
             case '7':
                 case7();
-                //sleep(5);
+                waitForInput();
                 break;
             case '8':
                 case8();
-                //sleep(5);
+                waitForInput();
                 break;
             case '9':
                 case9();
-                //sleep(5);
+                waitForInput();
                 break;
             case '0':
                 cout << "Goodbye!" << endl;
@@ -152,7 +155,6 @@ void Menu::case1() {
     Node a('d', "", 0, (cityDict[city]), "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     cout << "Maximum amount of reachable water in " << city << " is " << OperationFunctions::maxFlowOfCity(graph, a) << endl;
-    cout << endl;
 }
 
 void Menu::case2() {
@@ -160,7 +162,6 @@ void Menu::case2() {
 
     cout << string(LINE_SIZE_, '-') << endl;
     cout << "Total flow: " << max << endl;
-    cout << endl;
 }
 
 void Menu::case3() {
@@ -174,7 +175,6 @@ void Menu::case3() {
         for (auto t : res) {
             cout << t.first.getName() << " (" << t.first.getCode() << ") --> " << t.second << endl;
         }
-        cout << endl;
     }
 }
 
@@ -186,7 +186,6 @@ void Menu::case4() {
     cout << "Average of the differences between Capacities and Flows in all pipelines: " << averageAndMax.first << endl;
     cout << "Maximum difference between Capacity and Flow, out of all pipelines: " << averageAndMax.second << endl;
     cout << "Variance of the differences between Capacities and Flows in all pipelines: " << variances << endl;
-    cout << endl;
 }
 
 void Menu::case5() {
@@ -196,7 +195,6 @@ void Menu::case5() {
     Node del('d', "", 0, reservoirCode, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
-    cout << endl;
 
 }
 
@@ -207,8 +205,6 @@ void Menu::case6() {
     Node del('u', "", 0, pumpingCode, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::deactivation(graph, del);
-    cout << endl;
-
 }
 
 void Menu::case7() {
@@ -240,7 +236,6 @@ void Menu::case7() {
     Node end(charB, "", 0, B, "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::citiesOfCriticalPipe(graph, start, end);
-    cout << endl;
 }
 
 void Menu::case8() {
@@ -250,7 +245,6 @@ void Menu::case8() {
     Node a('t', "", 0, cityDict[city], "", 0, 0);
     cout << string(LINE_SIZE_, '-') << endl;
     OperationFunctions::criticalPipesOfCity(graph,a);
-    cout << endl;
 }
 
 void Menu::case9() {
@@ -262,6 +256,6 @@ void Menu::case9() {
     cout << string(2*(LINE_SIZE_/5), ' ');
     cout << "Rodrigo Dias Ferreira Loureiro de Sousa (up202205751@up.pt)" << endl;
     cout << "Date: March 2024" << endl;
-    cout << endl;
-
 }
+
+
