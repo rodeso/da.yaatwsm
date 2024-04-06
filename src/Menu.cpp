@@ -100,39 +100,39 @@ void Menu::run() {
         switch (decision[0]) {
             case '1':
                 case1();
-                sleep(5);
+                //sleep(5);
                 break;
             case '2':
                 case2();
-                sleep(5);
+                //sleep(5);
                 break;
             case '3':
                 case3();
-                sleep(5);
+                //sleep(5);
                 break;
             case '4':
                 case4();
-                sleep(5);
+                //sleep(5);
                 break;
             case '5':
                 case5();
-                sleep(5);
+                //sleep(5);
                 break;
             case '6':
                 case6();
-                sleep(5);
+                //sleep(5);
                 break;
             case '7':
                 case7();
-                sleep(5);
+                //sleep(5);
                 break;
             case '8':
                 case8();
-                sleep(5);
+                //sleep(5);
                 break;
             case '9':
                 case9();
-                sleep(5);
+                //sleep(5);
                 break;
             case '0':
                 cout << "Goodbye!" << endl;
