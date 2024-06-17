@@ -9,7 +9,7 @@ Yet Another Analysis Tool for Water Supply Management (YAATWSM)
 - **Tools:** C++
 - **Institution:** [FEUP](https://sigarra.up.pt/feup/en/web_page.Inicial)
 - **Course:** [DA](https://sigarra.up.pt/feup/pt/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=520321) (Algorithm Design)
-- **Project grade:** 18.70
+- **Project grade:** 18.7
 - **Group members:**
   - Afonso Pedro Maia de Castro (up202208026@up.pt)
   - Pedro Trindade Gonçalves Cadilhe Santos (up202205900@up.pt)
